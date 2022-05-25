@@ -60,4 +60,16 @@ const getByPostId = async (id) => {
     return response;
 };
 
-module.exports = { validatePost, validateCategoryId, getAllPosts, getByPostId };
+const createBlogPost = async (title, content, id) => {
+    const create = await BlogPost.create({
+        title,
+        content,
+        userId: id.user.data.id,
+        published: new Date(),
+        updated: new Date(),
+    });
+
+    return create;
+};
+
+module.exports = { validatePost, validateCategoryId, getAllPosts, getByPostId, createBlogPost };
